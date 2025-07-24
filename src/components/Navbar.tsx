@@ -1,5 +1,3 @@
-'use client';
-
 import Link from 'next/link';
 
 export default function Navbar() {
@@ -14,7 +12,7 @@ export default function Navbar() {
           <Link href="/">Home</Link>
           <Link href="/about">About</Link>
           <Link href="/contact">Contact</Link>
-          <Link href="/track">Tracking</Link>
+          <Link href="/track">Tracking</Link> {/* 👈 This is the link */}
         </nav>
         <Link
           href="/contact"

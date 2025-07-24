@@ -1,0 +1,7 @@
+POST http://localhost:3000/api/track
+Content-Type: application/json
+
+{
+  "trackingNumber": "HVHJYNW12X",
+  "zipCode": "93728"
+}
