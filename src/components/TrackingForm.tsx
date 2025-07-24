@@ -16,29 +16,33 @@ export default function TrackingForm() {
   };
 
   return (
-    <section className="bg-blue-300 py-16 px-4">
+    <section className="bg-gradient-to-br from-blue-100 via-blue-50 to-white py-16 px-4">
       <div className="max-w-3xl mx-auto text-center">
         <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 mb-8">
           Waiting for a delivery? <span className="text-blue-600">Track it here.</span>
         </h2>
-        <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 justify-center items-stretch">
+
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col sm:flex-row gap-4 items-stretch justify-center"
+        >
           <input
             type="text"
             placeholder="Tracking Number"
-            className="px-4 py-3 rounded border border-gray-300 flex-1 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="flex-grow bg-white px-4 py-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
             value={trackingNumber}
             onChange={(e) => setTrackingNumber(e.target.value)}
           />
           <input
             type="text"
-            placeholder="Delivery ZIP Code"
-            className="px-4 py-3 rounded border border-gray-300 flex-1 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            placeholder="ZIP Code"
+            className="w-32 bg-white px-4 py-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
             value={zipCode}
             onChange={(e) => setZipCode(e.target.value)}
           />
           <button
             type="submit"
-            className="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700 transition"
+            className="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700 transition whitespace-nowrap"
           >
             Track Your Delivery
           </button>
