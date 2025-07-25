@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import TrackingProgress from '@/components/TrackingProgress';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { useRouter } from 'next/navigation';
 
 interface StatusUpdate {
   status: string;
@@ -13,6 +14,7 @@ interface StatusUpdate {
 }
 
 export default function TrackPage() {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const trackingNumber = searchParams.get('number') || '';
   const zipCode = searchParams.get('zip') || '';
@@ -61,10 +63,19 @@ export default function TrackPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formTracking || !formZip) return;
-    window.location.href = `/track?number=${formTracking}&zip=${formZip}`;
+    // window.location.href = `/track?number=${formTracking}&zip=${formZip}`;
+    router.push(`/track?number=${formTracking}&zip=${formZip}`);
   };
 
-  console.log("data: ", data);
+  function FormattedDate({ date }: { date: string | Date }) {
+  const [formatted, setFormatted] = useState('');
+
+  useEffect(() => {
+    setFormatted(new Date(date).toLocaleString());
+  }, [date]);
+
+  return <>{formatted}</>;
+}
 
   return (
     <>
@@ -73,8 +84,7 @@ export default function TrackPage() {
         <div className="max-w-6xl mx-auto">
           <h1 className="text-2xl font-semibold mb-6">Track Your Delivery</h1>
 
-          {!trackingNumber || !zipCode ? (
-            <form onSubmit={handleSubmit} className="mb-10 flex flex-col sm:flex-row gap-4 max-w-xl">
+           <form onSubmit={handleSubmit} className="mb-10 flex flex-col sm:flex-row gap-4 max-w-xl">
               <input
                 type="text"
                 placeholder="Tracking Number"
@@ -98,7 +108,6 @@ export default function TrackPage() {
                 Track
               </button>
             </form>
-          ) : null}
 
           {loading && <p>Loading...</p>}
           {notFound && <p className="text-red-500">Tracking info not found.</p>}
@@ -127,7 +136,7 @@ export default function TrackPage() {
                         {data.statusUpdates.map((update, idx) => (
                           <tr key={idx} className="hover:bg-blue-50">
                             <td className="px-3 py-2 border-b text-gray-700 whitespace-nowrap">
-                              {new Date(update.status_time).toLocaleString()}
+                                <FormattedDate date={update.status_time} />
                             </td>
                             <td className="px-3 py-2 border-b text-gray-900">
                               {update.comment}
