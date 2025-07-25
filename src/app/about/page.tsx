@@ -12,7 +12,7 @@ export default function AboutPage() {
       <main className="bg-gradient-to-br from-blue-50 via-white to-blue-100 min-h-screen px-4 py-20">
         <div className="max-w-6xl mx-auto space-y-24">
           <section className="text-center space-y-8">
-            <h1 className="text-4xl font-bold text-blue-700">About UrgentShip</h1>
+            <h1 className="text-4xl font-bold text-blue-700">We&#39;re the Experts Behind Every On-Time Arrival</h1>
             <p className="text-lg text-gray-700 max-w-2xl mx-auto">
               <strong>Seconds count. Minutes matter.</strong> At UrgentShip, we understand that in the
               world of critical deliveries, there is no room for delay. Whether you&#39;re sending
