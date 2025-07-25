@@ -6,6 +6,17 @@ import TrackingProgress from '@/components/TrackingProgress';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
+function getVisualProgressPhase(tracking: { status: string }[]): string {
+  const statuses = tracking.map(t => t.status.toLowerCase());
+
+  if (statuses.includes('delivered')) return 'Delivered';
+  if (statuses.includes('out_for_delivery')) return 'Out for Delivery';
+  if (statuses.includes('possession') || statuses.includes('confirmed')) return 'Picked up';
+  if (statuses.length > 0) return 'Shipping Information Received';
+
+  return 'Shipping Information Received';
+}
+
 export default function TrackPage() {
   const searchParams = useSearchParams();
   const trackingNumber = searchParams.get('number') || '';
@@ -57,129 +68,84 @@ export default function TrackPage() {
     window.location.href = `/track?number=${formTracking}&zip=${formZip}`;
   };
 
-  function mapToStep(status: string): string {
-  const normalized = status.toLowerCase();
-
-  if (
-    normalized.includes('submitted') ||
-    normalized.includes('order received') ||
-    normalized.includes('received') ||
-    normalized.includes('confirmed')
-  ) {
-    return 'Shipping Information Received';
-  }
-
-  if (normalized.includes('possession') || normalized.includes('picked up')) {
-    return 'Picked up';
-  }
-
-  if (normalized.includes('check') || normalized.includes('scanned at hub')) {
-    return 'Checked in';
-  }
-
-  if (normalized.includes('out for delivery')) {
-    return 'Out for Delivery';
-  }
-
-  if (normalized.includes('delivered')) {
-    return 'Delivered';
-  }
-
-  // fallback
-  return 'Shipping Information Received';
-}
-
-function getVisualProgressPhase(tracking: { status: string }[]): string {
-  const statuses = tracking.map(t => t.status.toLowerCase());
-
-  if (statuses.includes('delivered')) {
-    return 'Delivered';
-  }
-
-  if (statuses.includes('out_for_delivery')) {
-    return 'Out for Delivery';
-  }
-
-  if (statuses.includes('possession') || statuses.includes('confirmed')) {
-    return 'Picked up';
-  }
-
-  if (statuses.length > 0) {
-    return 'Shipping Information Received';
-  }
-
-  return 'Shipping Information Received'; // fallback
-}
-
-
-
   return (
     <>
-    <Navbar />
-    <div className="min-h-screen px-4 py-12">
-      <div className="max-w-6xl mx-auto">
-        <h1 className="text-2xl font-semibold mb-6">Track Your Delivery</h1>
+      <Navbar />
+      <div className="min-h-screen px-4 py-12">
+        <div className="max-w-6xl mx-auto">
+          <h1 className="text-2xl font-semibold mb-6">Track Your Delivery</h1>
 
-        {/* Form if no params */}
-        {!trackingNumber || !zipCode ? (
-          <form onSubmit={handleSubmit} className="mb-10 flex flex-col sm:flex-row gap-4 max-w-xl">
-            <input
-              type="text"
-              placeholder="Tracking Number"
-              className="flex-grow px-4 py-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              value={formTracking}
-              onChange={(e) => setFormTracking(e.target.value)}
-              required
-            />
-            <input
-              type="text"
-              placeholder="ZIP Code"
-              className="w-32 px-4 py-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              value={formZip}
-              onChange={(e) => setFormZip(e.target.value)}
-              required
-            />
-            <button
-              type="submit"
-              className="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700 transition whitespace-nowrap"
-            >
-              Track
-            </button>
-          </form>
-        ) : null}
+          {!trackingNumber || !zipCode ? (
+            <form onSubmit={handleSubmit} className="mb-10 flex flex-col sm:flex-row gap-4 max-w-xl">
+              <input
+                type="text"
+                placeholder="Tracking Number"
+                className="flex-grow px-4 py-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                value={formTracking}
+                onChange={(e) => setFormTracking(e.target.value)}
+                required
+              />
+              <input
+                type="text"
+                placeholder="ZIP Code"
+                className="w-32 px-4 py-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                value={formZip}
+                onChange={(e) => setFormZip(e.target.value)}
+                required
+              />
+              <button
+                type="submit"
+                className="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700 transition whitespace-nowrap"
+              >
+                Track
+              </button>
+            </form>
+          ) : null}
 
-        {/* Loading or Error */}
-        {loading && <p>Loading...</p>}
-        {notFound && <p className="text-red-500">Tracking info not found.</p>}
+          {loading && <p>Loading...</p>}
+          {notFound && <p className="text-red-500">Tracking info not found.</p>}
 
-        {/* Success: render progress */}
-        {data && (
-          <>
-            <TrackingProgress currentStatus={getVisualProgressPhase(data.statusUpdates)} />
-            <div className="mt-12">
-              <h2 className="text-lg font-bold mb-4">Status Updates</h2>
-              <table className="w-full text-sm">
-                <thead className="bg-gray-100 text-left">
-                  <tr>
-                    <th className="py-2 px-4 border-b">Date</th>
-                    <th className="py-2 px-4 border-b">Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {data.statusUpdates.map((update, idx) => (
-                    <tr key={idx} className="border-t">
-                      <td className="py-2 px-4">{new Date(update.status_time).toLocaleString()}</td>
-                      <td className="py-2 px-4">{update.comment}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </>
-        )}
+          {data && (
+            <>
+              <div className="mb-6">
+                <h2 className="text-lg font-medium text-gray-700">Tracking Number:</h2>
+                <p className="text-xl font-bold text-blue-700 tracking-wider">{trackingNumber}</p>
+              </div>
+
+              <TrackingProgress currentStatus={(data.status)} />
+              
+              <div className="mt-12 mx-auto">
+                <h2 className="text-lg font-bold mb-4">Status Updates</h2>
+                
+                  <div className="max-w-3xl mx-auto mt-8">
+                    <table className="w-full text-sm text-left border-collapse border-blue-400 border-2">
+                      <thead className="bg-blue-50 text-blue-800 uppercase text-xs font-semibold">
+                        <tr>
+                          <th className="px-3 py-2 border-b w-52 whitespace-nowrap">Date</th>
+                          <th className="px-3 py-2 border-b">Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {data.statusUpdates.map((update, idx) => (
+                          <tr key={idx} className="hover:bg-blue-50">
+                            <td className="px-3 py-2 border-b text-gray-700 whitespace-nowrap">
+                              {new Date(update.status_time || update.LocalTime).toLocaleString()}
+                            </td>
+                            <td className="px-3 py-2 border-b text-gray-900">
+                              {update.comment || update.Description}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+
+              </div>
+            </>
+          )}
+        </div>
       </div>
-    </div>
-    <Footer />
+      <Footer />
     </>
   );
 }

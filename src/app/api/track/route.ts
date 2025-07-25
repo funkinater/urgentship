@@ -24,12 +24,12 @@ export async function POST(request: Request) {
 
     const result = await azureRes.json();
 
-    if(zipCode != result.recipient.zip?.substring(0, 5)) {
+    if(zipCode != result.recipient.zip?.trim().substring(0, 5)) {
       return NextResponse.json({ error: 'Zip code does not match recipient'}, { status: 401 });
     }
 
     return NextResponse.json({
-      status: result.tracking[result.tracking.length - 1].comment,
+      status: result.tracking[result.tracking.length - 1].status,
       statusUpdates: result.tracking || [],
     });
   } catch (err) {
