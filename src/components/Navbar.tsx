@@ -23,7 +23,7 @@ export default function Navbar() {
         <nav className="hidden md:flex space-x-6 font-medium text-gray-700">
           <Link href="/">Home</Link>
           <Link href="/about">About</Link>
-          <Link href="/contact">Contact</Link>
+          {/* <Link href="/contact">Contact</Link> */}
           <Link href="/track">Tracking</Link>
         </nav>
 

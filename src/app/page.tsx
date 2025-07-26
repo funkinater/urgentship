@@ -5,6 +5,7 @@ import Footer from '@/components/Footer';
 import ServicesSection from '@/components/ServicesSection';
 import TrackingForm from '@/components/TrackingForm';
 import AnimatedOnScroll from '@/components/AnimatedOnScroll';
+import CallToAction from '@/components/CallToAction';
 
 export default function Home() {
   return (
@@ -25,6 +26,10 @@ export default function Home() {
 
         <AnimatedOnScroll delay={0.3}>
           <ServicesSection />
+        </AnimatedOnScroll>
+
+        <AnimatedOnScroll delay={0.4}>
+          <CallToAction />
         </AnimatedOnScroll>
       </main>
       
