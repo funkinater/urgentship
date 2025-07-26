@@ -19,7 +19,7 @@ export default function TrackingForm() {
     <section className="bg-gradient-to-br from-blue-100 via-blue-50 to-white py-16 px-4">
       <div className="max-w-3xl mx-auto text-center">
         <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 mb-8">
-          Waiting for a delivery? <span className="text-blue-600">Track it here.</span>
+          Waiting for a delivery? <span className="text-blue-800">Track it here.</span>
         </h2>
 
         <form
@@ -36,7 +36,7 @@ export default function TrackingForm() {
           <input
             type="text"
             placeholder="ZIP Code"
-            className="w-32 bg-white px-4 py-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
+            className="md:w-32 bg-white px-4 py-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
             value={zipCode}
             onChange={(e) => setZipCode(e.target.value)}
           />

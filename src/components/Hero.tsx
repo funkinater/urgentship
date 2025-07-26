@@ -2,7 +2,7 @@
 
 export default function Hero() {
   return (
-    <section className="bg-white text-center py-24 px-4">
+    <section className="bg-[url('/bg-hero.jpg')] bg-cover bg-center text-center py-24 px-4">
       <div className="max-w-4xl mx-auto">
         <img
           src="/urgent-ship-logo.png"

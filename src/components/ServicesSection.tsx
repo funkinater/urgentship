@@ -3,7 +3,7 @@ import { FaTruck, FaBoxOpen, FaUserClock } from 'react-icons/fa'; // example ico
 
 export default function ServicesSection() {
   return (
-    <section className="py-20 bg-[#fdfdfb] px-4">
+    <section className="py-20 bg-[url('/bg-hero.jpg')] bg-cover px-4">
       <div className="max-w-6xl mx-auto text-center mb-12">
         <h2 className="text-4xl font-bold text-gray-900">Delivery Services</h2>
       </div>
