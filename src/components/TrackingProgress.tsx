@@ -11,7 +11,7 @@ import {
 import clsx from 'clsx';
 
 const statuses = [
-  { id: 'Shipping Information Received', icon: FaInfoCircle },
+  { id: 'Order Received', icon: FaInfoCircle },
   { id: 'Picked up', icon: FaBoxOpen },
   { id: 'Checked in', icon: FaWarehouse },
   { id: 'Out for Delivery', icon: FaTruck },
@@ -21,21 +21,21 @@ const statuses = [
 const statusOrder = statuses.map((s) => s.id.toLowerCase());
 
 const statusMap: Record<string, string> = {
-  created: 'Shipping Information Received',
-  accepted: 'Shipping Information Received',
-  confirmed: 'Shipping Information Received',
+  created: 'Order Received',
+  accepted: 'Order Received',
+  confirmed: 'Order Received',
   possession: 'Picked up',
   in_transit: 'Checked in',
   out_for_delivery: 'Out for Delivery',
   delivered: 'Delivered',
   delayed: 'Checked in',
-  void: 'Shipping Information Received',
+  void: 'Order Received',
   returned: 'Checked in',
   exception: 'Out for Delivery',
 };
 
 const statusTooltips: Record<string, string> = {
-  'Shipping Information Received': 'The information for this order has been transmitted to us, but it is not yet in UrgentShip\'s possession.',
+  'Order Received': 'The information for this order has been transmitted to us, but it is not yet in UrgentShip\'s possession.',
   'Picked up': 'Your package has been marked picked up and is now in the care of an UrgentShip team member.',
   'Checked in': 'The package has been scanned into the local sorting hub and placed in outbound queue for delivery.',
   'Out for Delivery': 'Your delivery driver has your package and is on the way.',
@@ -50,7 +50,7 @@ interface TrackingProgressProps {
 
 export default function TrackingProgress({ currentStatus }: TrackingProgressProps) {
   const normalizedStatus = currentStatus.toLowerCase();
-  const mappedStep = statusMap[normalizedStatus] || 'Shipping Information Received';
+  const mappedStep = statusMap[normalizedStatus] || 'Order Received';
   const currentIndex = statusOrder.indexOf(mappedStep.toLowerCase());
   const isException = normalizedStatus === 'exception';
 
