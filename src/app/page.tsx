@@ -27,10 +27,10 @@ export default function Home() {
           <ServicesSection />
         </AnimatedOnScroll>
       </main>
-
-      <AnimatedOnScroll delay={0.4}>
+      
         <Footer />
-      </AnimatedOnScroll>
+
+      
     </>
   );
 }

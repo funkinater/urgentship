@@ -16,7 +16,7 @@ export default function TrackingForm() {
   };
 
   return (
-    <section className="bg-gradient-to-br from-blue-100 via-blue-50 to-white py-16 px-4">
+    <section className="bg-gradient-to-br from-gray-300 via-blue-300 to-white py-16 px-4">
       <div className="max-w-3xl mx-auto text-center">
         <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 mb-8">
           Waiting for a delivery? <span className="text-blue-800">Track it here.</span>
