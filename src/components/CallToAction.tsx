@@ -32,7 +32,7 @@ export default function CallToAction({ onSubmit }: CallToActionProps) {
   };
 
   return (
-    <section className="bg-blue-700 text-white text-center py-16 rounded-lg shadow-inner space-y-6 px-4">
+    <section className="bg-blue-700 text-white text-center py-16 rounded-lg shadow-inner space-y-6 px-4 mb-10">
       <h2 className="text-3xl font-bold">Don&#39;t delay. Contact us today!</h2>
       <form
         onSubmit={handleSubmit}

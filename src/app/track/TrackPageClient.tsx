@@ -25,7 +25,7 @@ export default function TrackPage() {
   const searchParams = useSearchParams();
   const trackingNumber = searchParams.get('number') || '';
   const zipCode = searchParams.get('zip') || '';
-
+  const [imageButton, toggleImageButton] = useState(false)
   const [formTracking, setFormTracking] = useState(trackingNumber);
   const [formZip, setFormZip] = useState(zipCode);
 
@@ -74,6 +74,10 @@ export default function TrackPage() {
     // window.location.href = `/track?number=${formTracking}&zip=${formZip}`;
     router.push(`/track?number=${formTracking}&zip=${formZip}`);
   };
+
+  const toggleImage = () => {
+    toggleImageButton(!imageButton);
+  }
 
   function FormattedDate({ date }: { date: string | Date }) {
   const [formatted, setFormatted] = useState('');
@@ -174,12 +178,18 @@ export default function TrackPage() {
 
               {data.deliveryDetails && data.deliveryDetails.image && (
                 <div className="mt-8 text-center">
-                  <h2 className="text-lg font-bold text-gray-700 mb-2">Delivery Confirmation</h2>
-                  <img
+                  <div className="flex flex-row space-x-4">
+                    <h2 className="text-lg font-bold text-gray-700 mb-2">Delivery Image</h2>
+                    <div>
+                      <button className="bg-blue-600 text-white h-7 px-4 rounded-md hover:bg-blue-700 transition-colors duration-200"
+                      onClick={toggleImage}>{imageButton ? "Hide" : "Show"}</button>
+                    </div>
+                  </div>
+                  {imageButton && (<img
                     src={`/api/image-proxy?url=${encodeURIComponent(data.deliveryDetails.image)}`}
                     alt="Delivery confirmation"
                     className="mx-auto max-w-sm rounded shadow-lg"
-                  />
+                  />)}
                 </div>
               )}
 

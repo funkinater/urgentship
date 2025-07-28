@@ -26,7 +26,7 @@ export default function Home() {
         </AnimatedOnScroll>
 
         <AnimatedOnScroll delay={0.4}>
-          <CoverageSection />
+          <CallToAction />
         </AnimatedOnScroll>
 
         <AnimatedOnScroll delay={0.3}>
@@ -34,7 +34,7 @@ export default function Home() {
         </AnimatedOnScroll>
 
         <AnimatedOnScroll delay={0.4}>
-          <CallToAction />
+          <CoverageSection />
         </AnimatedOnScroll>
       </main>
       
