@@ -28,29 +28,40 @@ const features = [
 
 export default function FeatureSection() {
   return (
-    <section id="features" className="bg-gray-50 py-28 px-4">
+    <section id="features" className="bg-white py-22 px-4">
       <div className="max-w-5xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-16">
-          Why Choose <span className="text-blue-600">UrgentShip</span>
+        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-10">
+          What Sets UrgentShip Apart
         </h2>
 
-        <div className="space-y-8">
-          {features.map((feature, i) => (
-            <AnimatedOnScroll key={i} delay={i * 0.1}>
-              <div className="group bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition duration-300">
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-                  <div className="flex items-center space-x-3 text-lg font-semibold text-gray-800 group-hover:text-blue-600 transition">
-                    {feature.icon}
-                    <span>{feature.title}</span>
-                  </div>
-                  <div className="mt-3 md:mt-0 text-gray-500 md:max-w-xl md:text-right text-sm">
-                    {feature.desc}
+        
+      <div className="flex flex-col md:flex-row mx-auto">
+        <div id="image-container" className="w-80 md:w-120 mx-auto md:mr-20 md:mt-12">
+          <img src="/img/DeliveryDriver.png" 
+            className="border-2 rounded-md shadow-2xl"
+            alt="" />
+        </div>
+        <div className="flex flex-row">
+          <div className="space-y-8 mx-auto">
+            {features.map((feature, i) => (
+              <AnimatedOnScroll key={i} delay={i * 0.1}>
+                <div className="group bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition duration-300 mt-10">
+                  <div className="flex flex-col md:items-center">
+                    <div className="flex items-center space-x-3 text-lg font-semibold text-gray-800 group-hover:text-blue-600 transition">
+                      {feature.icon}
+                      <span>{feature.title}</span>
+                    </div>
+                    <div className="mt-3 md:mt-0 text-gray-500 md:max-w-xl text-sm">
+                      {feature.desc}
+                    </div>
                   </div>
                 </div>
-              </div>
-            </AnimatedOnScroll>
-          ))}
+              </AnimatedOnScroll>
+            ))}
+          </div>
         </div>
+
+      </div>
       </div>
     </section>
   );

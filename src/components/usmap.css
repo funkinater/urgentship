@@ -1,0 +1,11 @@
+.state {
+  fill: #e2e8f0; /* Tailwind slate-200 */
+  stroke: white;
+  stroke-width: 1;
+  transition: fill 0.3s ease;
+}
+
+.state.highlighted {
+  fill: #1d4ed8; /* Tailwind blue-700 */
+  cursor: pointer;
+}

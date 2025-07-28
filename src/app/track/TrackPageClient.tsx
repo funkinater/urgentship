@@ -13,6 +13,13 @@ interface StatusUpdate {
   status_time: Date;
 }
 
+interface DeliveryDetails {
+  pod_name: string;
+  image: string;
+  lat: number;
+  lng: number;
+}
+
 export default function TrackPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -22,7 +29,7 @@ export default function TrackPage() {
   const [formTracking, setFormTracking] = useState(trackingNumber);
   const [formZip, setFormZip] = useState(zipCode);
 
-  const [data, setData] = useState<{ status: string; statusUpdates: StatusUpdate[] } | null>(null);
+  const [data, setData] = useState<{ status: string; statusUpdates: StatusUpdate[], deliveryDetails: DeliveryDetails } | null>(null);
   const [loading, setLoading] = useState(false);
   const [notFound, setNotFound] = useState(false);
 
@@ -47,6 +54,7 @@ export default function TrackPage() {
         setData({
           status: result.status,
           statusUpdates: result.statusUpdates || [],
+          deliveryDetails: result.deliveryDetails || null
         });
         
       } catch (err) {
@@ -120,6 +128,10 @@ export default function TrackPage() {
               </div>
 
               <TrackingProgress currentStatus={(data.status)} />
+
+              {data.deliveryDetails && (
+                
+              )};
 
               <div className="mt-12 mx-auto">
                 <h2 className="text-lg font-bold mb-4">Status Updates</h2>

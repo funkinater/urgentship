@@ -52,32 +52,52 @@ export default function AboutPage() {
 
           <section className="space-y-16">
             <h2 className="text-3xl font-bold text-blue-700 text-center">Why UrgentShip?</h2>
-            <div className="grid md:grid-cols-2 gap-8">
-              {[
-                {
-                  title: 'On-Time. Every Time.',
-                  desc: 'Precision logistics with real-time tracking and proactive communication.',
-                },
-                {
-                  title: 'White-Glove Treatment.',
-                  desc: 'From pickup to final delivery, we go the extra mile for your customers.',
-                },
-                {
-                  title: 'People Who Get It.',
-                  desc: 'Veteran support teams who understand high-stakes delivery environments.',
-                },
-                {
-                  title: 'Scalable & Adaptable.',
-                  desc: 'Whether 10 packages or 10,000, we flex to meet your needs.',
-                },
-              ].map((item, idx) => (
-                <div key={idx} className="bg-white p-8 rounded-lg shadow-md space-y-2">
-                  <h3 className="text-xl font-semibold text-blue-800">{item.title}</h3>
-                  <p className="text-gray-700">{item.desc}</p>
-                </div>
-              ))}
+
+            <div className="flex md:flex-row space-x-10">
+              <div className="grid md:grid-cols-2 gap-8">
+                {[
+                  {
+                    title: 'On-Time. Every Time.',
+                    desc: 'Precision logistics with real-time tracking and proactive communication.',
+                    img: '/img/UrgentShip-Watch.png',
+                  },
+                  {
+                    title: 'White-Glove Treatment.',
+                    desc: 'From pickup to final delivery, we go the extra mile for your customers.',
+                    img: '/img/CallCenter.png',
+                  },
+                  {
+                    title: 'People Who Get It.',
+                    desc: 'Veteran support teams who understand high-stakes delivery environments.',
+                    img: '/img/warehouse.png',
+                  },
+                  {
+                    title: 'Scalable & Adaptable.',
+                    desc: 'Whether 10 packages or 10,000, we flex to meet your needs.',
+                    img: '/img/scalable2.jpg',
+                  },
+                ].map((item, idx) => (
+                  <div
+                    key={idx}
+                    className="bg-white rounded-lg shadow-md flex items-center justify-between gap-4"
+                  >
+                    <div className="w-2/3 space-y-2 p-6">
+                      <h3 className="text-xl font-semibold text-blue-800">{item.title}</h3>
+                      <p className="text-gray-700">{item.desc}</p>
+                    </div>
+                    <div className="w-1/3 flex justify-end">
+                      <img
+                        src={item.img}
+                        alt={item.title}
+                        className="h-40 w-40"
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </section>
+
 
           <section className="text-center pt-12 space-y-6">
             <p className="text-lg font-semibold text-gray-800">
