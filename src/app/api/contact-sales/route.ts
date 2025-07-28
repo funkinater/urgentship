@@ -9,7 +9,7 @@ const logoUrl = process.env.URGENTSHIP_LOGO_URL! || 'https://www.urgentship.com/
 async function getGeoInfo(ip: string) {
   try {
     const res = await fetch(`https://ipapi.co/${ip}/json`);
-    var jsonResponse = await res.json();
+    const jsonResponse = await res.json();
     console.log(jsonResponse);
     return jsonResponse;
   } catch {
