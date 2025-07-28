@@ -20,7 +20,7 @@ import USMap from '@/components/USMap';
 export default function CoverageSection() {
   return (
     <section className="py-12 mx-auto bg-slate-500 text-white">
-      <h2 className="text-3xl font-bold text-white text-center mb-6">
+      <h2 className="text-3xl font-bold text-white text-center mb-6 px-5">
         Expanding Reach with Regional Excellence
       </h2>
       <div className="flex flex-col-reverse md:flex-row p-6 justify-center items-center md:items-start gap-8">
@@ -37,7 +37,7 @@ export default function CoverageSection() {
 
         {/* Map */}
         <div className="px-4 md:min-w-[400px]">
-          <USMap highlightedStates={['TX', 'CA', 'FL', 'AZ', 'OK', 'KS', 'CO', 'IL', 'MO', 'GA']} />
+          <USMap highlightedStates={['TX', 'CA', 'FL', 'AZ', 'OK', 'KS', 'CO', 'IL', 'MO', 'GA', 'NV']} />
         </div>
       </div>
     </section>
