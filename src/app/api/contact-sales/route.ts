@@ -9,7 +9,9 @@ const logoUrl = process.env.URGENTSHIP_LOGO_URL! || 'https://www.urgentship.com/
 async function getGeoInfo(ip: string) {
   try {
     const res = await fetch(`https://ipapi.co/${ip}/json`);
-    return await res.json();
+    var jsonResponse = await res.json();
+    console.log(jsonResponse);
+    return jsonResponse;
   } catch {
     return null;
   }
@@ -35,7 +37,7 @@ export async function POST(req: NextRequest) {
     await emailClient.beginSend({
       senderAddress: sender,
       recipients: {
-        to: [{ address: 'sales@urgentship.com' }],
+        to: [{ address: 'support@urgentship.com' }],
       },
       content: {
         subject: `New Contact Request from ${email}`,

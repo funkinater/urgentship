@@ -56,11 +56,19 @@ export default function CallToAction({ onSubmit }: CallToActionProps) {
 
       {submitted && (
         <Modal onClose={() => setSubmitted(false)}>
-          <h3 className="text-xl font-bold mb-4">Thank you for your interest!</h3>
-          <p className="text-gray-700">
-            Someone from our team will be in contact with you soon to see how we can be of assistance.
-          </p>
+          <div className="text-center px-4 py-6">
+            <h3 className="text-2xl font-semibold text-blue-700 mb-2">
+              🎉 Message Received!
+            </h3>
+            <p className="text-gray-800 mb-4">
+              Thanks for reaching out — we’re excited to connect with you!
+            </p>
+            <p className="text-gray-600">
+              One of our team members will be in touch shortly to learn more about how we can help.
+            </p>
+          </div>
         </Modal>
+
       )}
     </section>
   );

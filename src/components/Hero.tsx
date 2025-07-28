@@ -1,5 +1,7 @@
 'use client';
 
+import { Link as ScrollLink } from 'react-scroll';
+
 export default function Hero() {
   return (
     <section className="bg-[url('/bg-hero.jpg')] bg-cover bg-center text-center py-24 px-4">
@@ -15,12 +17,19 @@ export default function Hero() {
         <p className="text-lg md:text-xl text-gray-600 mb-8">
           Smart. Scalable. Same-Day Shipping for Critical Packages.
         </p>
-        <a
-          href="#features"
-          className="inline-block bg-blue-600 text-white px-6 py-3 rounded-md text-lg hover:bg-blue-700 transition"
+
+        <ScrollLink
+          to="features"
+          smooth={true}
+          duration={500}
+          offset={-80} // adjust for fixed nav height
+          className="inline-block bg-blue-600 text-white px-6 py-3 rounded-md text-lg hover:bg-blue-700 transition cursor-pointer"
         >
-          Learn More
-        </a>
+          See Features
+        </ScrollLink>
+
+
+        
       </div>
     </section>
   );

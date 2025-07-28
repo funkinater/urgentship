@@ -28,7 +28,7 @@ const features = [
 
 export default function FeatureSection() {
   return (
-    <section className="bg-gray-50 py-28 px-4">
+    <section id="features" className="bg-gray-50 py-28 px-4">
       <div className="max-w-5xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-16">
           Why Choose <span className="text-blue-600">UrgentShip</span>
