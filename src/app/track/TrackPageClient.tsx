@@ -120,7 +120,7 @@ export default function TrackPage() {
           {loading && <p>Loading...</p>}
           {notFound && <p className="text-red-500">Tracking info not found.</p>}
 
-          {data && (
+          {/* {data && (
             <>
               <div className="mb-6">
                 <h2 className="text-lg font-medium text-gray-700">Tracking Number:</h2>
@@ -161,7 +161,57 @@ export default function TrackPage() {
 
               </div>
             </>
+          )} */}
+
+          {data && (
+            <>
+              <div className="mb-6">
+                <h2 className="text-lg font-medium text-gray-700">Tracking Number:</h2>
+                <p className="text-xl font-bold text-blue-700 tracking-wider">{trackingNumber}</p>
+              </div>
+
+              <TrackingProgress currentStatus={data.status} />
+
+              {data.deliveryDetails && data.deliveryDetails.image && (
+                <div className="mt-8 text-center">
+                  <h2 className="text-lg font-bold text-gray-700 mb-2">Delivery Confirmation</h2>
+                  <img
+                    src={`/api/image-proxy?url=${encodeURIComponent(data.deliveryDetails.image)}`}
+                    alt="Delivery confirmation"
+                    className="mx-auto max-w-sm rounded shadow-lg"
+                  />
+                </div>
+              )}
+
+              <div className="mt-12 mx-auto">
+                <h2 className="text-lg font-bold mb-4">Status Updates</h2>
+
+                <div className="max-w-3xl mx-auto mt-8">
+                  <table className="w-full text-sm text-left border-collapse border-blue-400 border-2">
+                    <thead className="bg-blue-50 text-blue-800 uppercase text-xs font-semibold">
+                      <tr>
+                        <th className="px-3 py-2 border-b w-52 whitespace-nowrap">Date</th>
+                        <th className="px-3 py-2 border-b">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {data.statusUpdates.map((update, idx) => (
+                        <tr key={idx} className="hover:bg-blue-50">
+                          <td className="px-3 py-2 border-b text-gray-700 whitespace-nowrap">
+                            <FormattedDate date={update.status_time} />
+                          </td>
+                          <td className="px-3 py-2 border-b text-gray-900">
+                            {update.comment}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </>
           )}
+
         </div>
       </div>
       <Footer />
