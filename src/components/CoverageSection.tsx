@@ -31,7 +31,7 @@ export default function CoverageSection() {
             UrgentShip proudly provides dedicated regional service throughout both Northern and Southern California, as well as select areas of Nevada and Arizona. Our footprint is further extended through strategic partnerships with trusted last-mile delivery providers in key states including Texas, Oklahoma, Colorado, Kansas, Missouri, Georgia, Florida, and Illinois.
           </h3>
           <h3>
-            As part of our continued growth, we are always seeking opportunities to expand our regional coverage and form new partnerships that align with our commitment to reliable, on-time delivery. If you're a logistics provider or regional carrier interested in partnering with UrgentShip, we welcome the opportunity to connect.
+            As part of our continued growth, we are always seeking opportunities to expand our regional coverage and form new partnerships that align with our commitment to reliable, on-time delivery. If you&#39;re a logistics provider or regional carrier interested in partnering with UrgentShip, we welcome the opportunity to connect.
           </h3>
         </div>
 
