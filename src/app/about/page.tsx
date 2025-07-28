@@ -69,12 +69,12 @@ export default function AboutPage() {
                   {
                     title: 'People Who Get It.',
                     desc: 'Veteran support teams who understand high-stakes delivery environments.',
-                    img: '/img/warehouse.png',
+                    img: '/img/Warehouse.png',
                   },
                   {
                     title: 'Scalable & Adaptable.',
                     desc: 'Whether 10 packages or 10,000, we flex to meet your needs.',
-                    img: '/img/scalable2.jpg',
+                    img: '/img/Scalable2.jpg',
                   },
                 ].map((item, idx) => (
                   <div
