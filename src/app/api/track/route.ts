@@ -31,7 +31,8 @@ export async function POST(request: Request) {
     return NextResponse.json({
       status: result.tracking[result.tracking.length - 1].status,
       statusUpdates: result.tracking || [],
-      deliveryDetails: result.delivery || {}
+      deliveryDetails: result.delivery || {},
+      recipient: result.recipient || {}
     });
   } catch (err) {
     console.error('API error:', err);

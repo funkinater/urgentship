@@ -6,6 +6,7 @@ import TrackingProgress from '@/components/TrackingProgress';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { useRouter } from 'next/navigation';
+import { div } from 'framer-motion/client';
 
 interface StatusUpdate {
   status: string;
@@ -20,6 +21,19 @@ interface DeliveryDetails {
   lng: number;
 }
 
+interface Address {
+  address_one: string,
+  address_two: string,
+  city: string,
+  state: string,
+  zip: string,
+  name: string,
+  note: string,
+  email: string,
+  phone: string,
+  contact: string
+}
+
 export default function TrackPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -29,7 +43,7 @@ export default function TrackPage() {
   const [formTracking, setFormTracking] = useState(trackingNumber);
   const [formZip, setFormZip] = useState(zipCode);
 
-  const [data, setData] = useState<{ status: string; statusUpdates: StatusUpdate[], deliveryDetails: DeliveryDetails } | null>(null);
+  const [data, setData] = useState<{ status: string; statusUpdates: StatusUpdate[], deliveryDetails: DeliveryDetails, recipient: Address } | null>(null);
   const [loading, setLoading] = useState(false);
   const [notFound, setNotFound] = useState(false);
 
@@ -54,7 +68,8 @@ export default function TrackPage() {
         setData({
           status: result.status,
           statusUpdates: result.statusUpdates || [],
-          deliveryDetails: result.deliveryDetails || null
+          deliveryDetails: result.deliveryDetails || null,
+          recipient: result.recipient || null
         });
         
       } catch (err) {
@@ -175,6 +190,36 @@ export default function TrackPage() {
               </div>
 
               <TrackingProgress currentStatus={data.status} />
+
+              {data.recipient && (
+                <div className="mt-12 mx-auto">
+                  <h2 className="text-lg font-bold mb-4">Recipient Information</h2>
+                  <div className="max-w-3xl mx-auto mt-8">
+                    <table className="w-full text-sm text-left border-collapse border-blue-400 border-2">
+                      <thead className="bg-blue-50 text-blue-800 uppercase text-xs font-semibold">
+                        <tr>
+                          <th className="px-3 py-2 border-b">Name and Address</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr className="hover:bg-blue-50">
+                            <td className="px-3 py-2 border-b text-gray-700 whitespace-nowrap">
+                              {data.recipient.name}<br />
+                              {data.recipient.address_one}<br />
+                              {data.recipient.address_two !== "" && (
+                                <>
+                                  {data.recipient.address_two}
+                                  <br />
+                                </>
+                              )}
+                              {data.recipient.city} {data.recipient.state} {data.recipient.zip}<br />
+                            </td>
+                          </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              )}
 
               {data.deliveryDetails && data.deliveryDetails.image && (
                 <div className="mt-8 text-center">
