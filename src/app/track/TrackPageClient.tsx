@@ -31,7 +31,8 @@ interface Address {
   note: string,
   email: string,
   phone: string,
-  contact: string
+  contact: string,
+  reference: string
 }
 
 export default function TrackPage() {
@@ -43,7 +44,7 @@ export default function TrackPage() {
   const [formTracking, setFormTracking] = useState(trackingNumber);
   const [formZip, setFormZip] = useState(zipCode);
 
-  const [data, setData] = useState<{ status: string; statusUpdates: StatusUpdate[], deliveryDetails: DeliveryDetails, recipient: Address } | null>(null);
+  const [data, setData] = useState<{ status: string; statusUpdates: StatusUpdate[], deliveryDetails: DeliveryDetails, recipient: Address, reference: string } | null>(null);
   const [loading, setLoading] = useState(false);
   const [notFound, setNotFound] = useState(false);
 
@@ -69,7 +70,8 @@ export default function TrackPage() {
           status: result.status,
           statusUpdates: result.statusUpdates || [],
           deliveryDetails: result.deliveryDetails || null,
-          recipient: result.recipient || null
+          recipient: result.recipient || null,
+          reference: result.reference || null
         });
         
       } catch (err) {
@@ -213,6 +215,23 @@ export default function TrackPage() {
                                 </>
                               )}
                               {data.recipient.city} {data.recipient.state} {data.recipient.zip}<br />
+                            </td>
+                          </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div className="max-w-3xl mx-auto mt-8">
+                    <table className="w-full text-sm text-left border-collapse border-blue-400 border-2">
+                      <thead className="bg-blue-50 text-blue-800 uppercase text-xs font-semibold">
+                        <tr>
+                          <th className="px-3 py-2 border-b">Reference</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr className="hover:bg-blue-50">
+                            <td className="px-3 py-2 border-b text-gray-700 whitespace-nowrap">
+                              {data.reference}
                             </td>
                           </tr>
                       </tbody>

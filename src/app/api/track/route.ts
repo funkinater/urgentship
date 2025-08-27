@@ -32,7 +32,8 @@ export async function POST(request: Request) {
       status: result.tracking[result.tracking.length - 1].status,
       statusUpdates: result.tracking || [],
       deliveryDetails: result.delivery || {},
-      recipient: result.recipient || {}
+      recipient: result.recipient || {},
+      reference: result.reference || null
     });
   } catch (err) {
     console.error('API error:', err);
