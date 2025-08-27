@@ -51,11 +51,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       >
         {children}
 
-        <Script
+        {/* <Script
           id="ze-snippet"
           src="https://static.zdassets.com/ekr/snippet.js?key=6bec6d35-b6f6-4049-8326-095ff39bbb53"
           strategy="afterInteractive" // loads after hydration
-        />
+        /> */}
       </body>
     </html>
   );
