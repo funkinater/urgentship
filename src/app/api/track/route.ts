@@ -8,7 +8,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    const azureRes = await fetch(`${process.env.TRACKING_URL!}/${trackingNumber}`, {
+    const trackingRes = await fetch(`${process.env.TRACKING_URL!}/${trackingNumber}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -16,24 +16,48 @@ export async function POST(request: Request) {
       }
     });
 
-    if (!azureRes.ok) {
-      const errorText = await azureRes.text();
-      console.error('Azure error:', errorText);
-      return NextResponse.json({ error: 'Azure Function failed' }, { status: azureRes.status });
+    if (!trackingRes.ok) {
+      const errorText = await trackingRes.text();
+      console.error('Tracking API error:', errorText);
+      return NextResponse.json({ error: 'Tracking service failed' }, { status: trackingRes.status });
     }
 
-    const result = await azureRes.json();
+    const result = await trackingRes.json();
 
-    if(zipCode != result.recipient.zip?.trim().substring(0, 5)) {
-      return NextResponse.json({ error: 'Zip code does not match recipient'}, { status: 401 });
+    if (zipCode !== result.destination?.zip?.trim().substring(0, 5)) {
+      return NextResponse.json({ error: 'Zip code does not match recipient' }, { status: 401 });
     }
+
+    const lastEvent = result.events?.[result.events.length - 1];
+    const baseUrl = new URL(process.env.TRACKING_URL!).origin;
 
     return NextResponse.json({
-      status: result.tracking[result.tracking.length - 1].status,
-      statusUpdates: result.tracking || [],
-      deliveryDetails: result.delivery || {},
-      recipient: result.recipient || {},
-      reference: result.reference || null
+      status: lastEvent?.status ?? '',
+      statusUpdates: (result.events ?? []).map((e: { status: string; description: string; timestamp: string }) => ({
+        status: e.status,
+        comment: e.description,
+        status_time: e.timestamp,
+      })),
+      deliveryDetails: result.pod ? {
+        pod_name: result.pod.name,
+        image: `${baseUrl}${result.pod.image}`,
+        lat: null,
+        lng: null,
+      } : {},
+      recipient: result.destination ? {
+        name: result.destination.name,
+        address_one: result.destination.address_one,
+        address_two: result.destination.address_two ?? '',
+        city: result.destination.city,
+        state: result.destination.state,
+        zip: result.destination.zip,
+        phone: result.destination.phone ?? '',
+        email: result.destination.email ?? '',
+        note: result.destination.note ?? '',
+        contact: '',
+        reference: '',
+      } : {},
+      reference: result.reference ?? null,
     });
   } catch (err) {
     console.error('API error:', err);

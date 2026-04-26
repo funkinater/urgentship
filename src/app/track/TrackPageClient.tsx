@@ -53,6 +53,7 @@ export default function TrackPage() {
       if (!trackingNumber || !zipCode) return;
 
       setLoading(true);
+      setNotFound(false);
       try {
         const res = await fetch('/api/track', {
           method: 'POST',
@@ -61,6 +62,7 @@ export default function TrackPage() {
         });
 
         if (!res.ok) {
+          setData(null);
           setNotFound(true);
           return;
         }

@@ -9,7 +9,9 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    const imageRes = await fetch(url);
+    const imageRes = await fetch(url, {
+      headers: { 'X-API-KEY': process.env.TRACKING_API_KEY ?? '' },
+    });
 
     if (!imageRes.ok) {
       return new Response('Failed to fetch image', { status: 502 });
