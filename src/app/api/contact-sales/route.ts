@@ -2,9 +2,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { EmailClient } from '@azure/communication-email';
 
-const emailClient = new EmailClient(process.env.AZURE_EMAIL_CONNECTION_STRING!);
-const sender = process.env.AZURE_EMAIL_SENDER!;
-const logoUrl = process.env.URGENTSHIP_LOGO_URL! || 'https://www.urgentship.com/logo.png';
+const logoUrl = process.env.URGENTSHIP_LOGO_URL || 'https://www.urgentship.com/logo.png';
 
 async function getGeoInfo(ip: string) {
   try {
@@ -18,6 +16,8 @@ async function getGeoInfo(ip: string) {
 }
 
 export async function POST(req: NextRequest) {
+  const emailClient = new EmailClient(process.env.AZURE_EMAIL_CONNECTION_STRING!);
+  const sender = process.env.AZURE_EMAIL_SENDER!;
   try {
     const { email } = await req.json();
     if (!email || typeof email !== 'string') {
