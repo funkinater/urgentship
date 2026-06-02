@@ -28,13 +28,6 @@ export default function Navbar() {
 
     {/* Right Side Buttons */}
     <div className="flex items-center space-x-4">
-      <Link
-        href="https://my.urgentship.com"
-        className="hidden md:inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition text-sm font-medium"
-      >
-        MyUrgentShip Login
-      </Link>
-
       {/* Mobile Nav Trigger */}
       <div className="md:hidden">
         <MobileNav />
